@@ -26,7 +26,7 @@ C:\mssql-backups       ← stores your .bak backup files
 ---
 
 ---
-##🧠 Step 3: Connect Using SSMS
+## 🧠 Step 3: Connect Using SSMS
 - Open SQL Server Management Studio (SSMS)
 - Connect to: localhost,1433
 - Use SQL Server Authentication:
@@ -36,4 +36,32 @@ Login: sa  ← username
 Password: YourStrong!Passw0rd ← Pass
 ```
 ---
+## 🗂️ Step 4: Restore a .bak File
+- Copy your .bak file into C:\mssql-backups
+- In SSMS:Right-click Databases → Restore Database
+- Select Device → Add → find file at:
+```plaintext /var/opt/mssql/backup/yourfile.bak ```
+- Click OK
+- Make sure file paths look like:
 
+- Data File (MDF): ```plaintext /var/opt/mssql/data/YourDB.mdf ```
+- Log File (LDF): ```plaintext /var/opt/mssql/data/YourDB_log.ldf ```
+---
+## 🔄 Step 5: Backup Your Database
+- To backup your DB, run this SQL query in SSMS:
+```plaintext
+BACKUP DATABASE YourDB
+TO DISK = '/var/opt/mssql/backup/YourDB.bak'
+```
+---
+
+## 🧪 Optional: Check Files Inside Container
+- You can check your files inside the Docker container:
+```plaintext
+docker exec -it sql2022 bash
+ls /var/opt/mssql/data
+ls /var/opt/mssql/backup
+```
+----
+
+### Thank you ! Umer
