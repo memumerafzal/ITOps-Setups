@@ -19,7 +19,7 @@ Before running the SQL Server container, create these folders:
 ```plaintext
 C:\docker-sql-data     ← stores your .mdf and .ldf database files
 C:\mssql-backups       ← stores your .bak backup files
-
+```
 ---
 ## 🐳 Step 2: Run the SQL Server Docker Container
 - Open PowerShell as Administrator and run: .ps1 file placed in home directory.
@@ -34,5 +34,6 @@ C:\mssql-backups       ← stores your .bak backup files
 ```plaintext
 Login: sa  ← username
 Password: YourStrong!Passw0rd ← Pass
+```
 ---
 
