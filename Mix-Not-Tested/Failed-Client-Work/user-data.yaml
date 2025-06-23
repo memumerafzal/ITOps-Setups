@@ -1,0 +1,40 @@
+#cloud-config
+autoinstall:
+  version: 1
+  identity:
+    hostname: rconnectvm
+    username: tspmaster
+    password: $6$8REpMKI8Qv8ISiGM$70xpPw6tu3.IbaEo2VpLqddSxnj4oRaeJkw4ivO7BIC3nef6.qCLmb11ArMsaboCGoKwqrlIOKTxZCRH.8m8a0
+  # WE'LL GENERATE THIS LATER
+  network:
+    version: 2
+    ethernets:
+      enp0s3:
+        match:
+          name: en*
+        addresses: [192.168.0.10/24]
+        gateway4: 192.168.0.1
+        nameservers:
+          addresses: [8.8.8.8, 8.8.4.4]
+  storage:
+    layout:
+      name: lvm
+  packages:
+    - postgresql-14
+    - postgresql-contrib
+    - openjdk-11-jdk
+    - wget
+    - unzip
+    - python3.10
+    - python3-pip
+    - apache2
+  user-data:
+    chpasswd:
+      list: |
+        root:cP48vKT9NCaKI0hN4TY=
+      expire: false
+  late-commands:
+    - curtin in-target --target /target mkdir -p /postinstall
+    - curtin in-target --target /target cp /cdrom/postinstall/* /postinstall/
+    - curtin in-target --target /target chmod +x /postinstall/setup.sh
+    - curtin in-target --target /target /postinstall/setup.sh
